@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Script from 'next/script';
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Testimonials from "@/components/Testimonials";
@@ -34,12 +35,12 @@ export default function Home() {
   const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null);
 
   // EmailJS service and template configuration
-  const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_cdapukd';
-  const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_attlpl6';
-  const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'your-public-key-here';
+  const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+  const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+  const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
   // Handle form submission
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitMessage(null);
@@ -63,11 +64,6 @@ export default function Home() {
       'g-recaptcha-response': recaptchaValue, // Include reCAPTCHA token for server-side validation
     };
 
-    // Log the data being sent for debugging (remove in production)
-    console.log('Sending data to EmailJS:', {
-      ...templateParams,
-      'g-recaptcha-response': '***HIDDEN***' // Hide the actual token in logs
-    });
 
     // Validate that required fields are filled
     const name = (form.elements.namedItem('user_name') as HTMLInputElement)?.value;
@@ -88,25 +84,27 @@ export default function Home() {
       return;
     }
 
-    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
-      .then(
-        (result) => {
-          console.log('EmailJS result:', result.text);
-          setSubmitMessage({ type: 'success', text: 'Message sent successfully! We\'ll get back to you soon.' });
-          form.reset(); // Clear the form after successful submission
-          if (window.grecaptcha) {
-            window.grecaptcha.reset(); // Reset the reCAPTCHA widget
-          }
-          setRecaptchaValue(null); // Reset reCAPTCHA value
-        },
-        (error) => {
-          console.error('EmailJS error:', error.text);
-          setSubmitMessage({ type: 'error', text: 'Error sending message. Please try again or contact us directly.' });
-        }
-      )
-      .finally(() => {
+    try {
+      // Ensure emailjs is initialized
+      if (!PUBLIC_KEY || !SERVICE_ID || !TEMPLATE_ID) {
+        setSubmitMessage({ type: 'error', text: 'Email configuration is missing. Please contact us directly.' });
         setIsSubmitting(false);
-      });
+        return;
+      }
+
+      const result = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+      setSubmitMessage({ type: 'success', text: 'Thank you! Eric or the team will contact you soon.' });
+      form.reset(); // Clear the form after successful submission
+      if (typeof window !== 'undefined' && (window as any).grecaptcha) {
+        (window as any).grecaptcha.reset(); // Reset the reCAPTCHA widget
+      }
+      setRecaptchaValue(null); // Reset reCAPTCHA value
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setSubmitMessage({ type: 'error', text: 'Error sending message. Please try again or contact us directly.' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Define valid section IDs
@@ -280,8 +278,8 @@ export default function Home() {
               <a href="#membership" onClick={(e) => { e.preventDefault(); scrollToSection('membership'); }} className="text-white hover:text-core-red transition-colors text-sm font-medium uppercase tracking-wider" aria-label="Go to membership section">Membership</a>
             </div>
             <div className="md:hidden">
-              <button className="text-white" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-                {isMobileMenuOpen ? <FaTimes className="w-6 h-6" /> : <FaBars className="w-6 h-6" />}
+              <button className="text-white" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}>
+                {isMobileMenuOpen ? <FaTimes className="w-6 h-6" aria-hidden="true" /> : <FaBars className="w-6 h-6" aria-hidden="true" />}
               </button>
             </div>
             {isMobileMenuOpen && (
@@ -304,10 +302,11 @@ export default function Home() {
       <section id="home" className="relative py-28 md:py-40 overflow-hidden mt-16 h-[80vh] flex items-center">
         <div className="absolute inset-0 z-0">
                   <Image
-                    src={heroImg.src}
+                    src={heroImg}
                     alt="CORE Karachi - Elite Fitness Performance Center"
                     fill
                     priority={true}
+                    sizes="100vw"
                     className="object-cover"
                   />
           <div className="absolute inset-0 bg-black/60"></div>
@@ -338,7 +337,7 @@ export default function Home() {
             {services.map((service, index) => (
               <Card key={index} className="text-center p-8 bg-core-gray-800/50 border-core-red/20 hover:border-core-red/40 transition-all duration-300 relative overflow-hidden group">
                 <div className="absolute inset-0 z-0">
-                  <Image src={service.image} alt={`${service.title} - ${service.description}`} fill className="object-cover" />
+                  <Image src={service.image} alt={`${service.title} - ${service.description}`} width={400} height={300} className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" />
                   <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors z-10"></div>
                 </div>
                 <div className="relative z-10">
@@ -404,7 +403,16 @@ export default function Home() {
           </div>
 
           <div className="text-center">
-            <Button variant="primary" size="lg" className="uppercase font-bold tracking-widest" aria-label="Download workout schedule">
+            <Button
+              variant="primary"
+              size="lg"
+              className="uppercase font-bold tracking-widest"
+              aria-label="Download workout schedule"
+              onClick={() => {
+                // In a real implementation, this would download the schedule
+                alert('Schedule download would happen here');
+              }}
+            >
               Download Schedule
             </Button>
           </div>
@@ -421,7 +429,7 @@ export default function Home() {
             {whyChooseUs.map((item, index) => (
               <Card key={index} className="text-center p-8 bg-core-gray-800/50 border-core-red/20 hover:border-core-red/40 transition-all duration-300 relative overflow-hidden group">
                 <div className="absolute inset-0 z-0">
-                  <Image src={item.image.src} alt={`${item.title} - ${item.description}`} fill className="object-cover" />
+                  <Image src={item.image} alt={`${item.title} - ${item.description}`} width={400} height={300} className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw" />
                   <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors z-10"></div>
                 </div>
                 <div className="relative z-10">
@@ -452,7 +460,17 @@ export default function Home() {
                     {plan.features.map((f, i) => <li key={i} className="flex items-center text-core-gray-300 text-sm"><svg className="w-5 h-5 text-core-green mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>{f}</li>)}
                   </ul>
                   <div className="mt-8">
-                    <Button variant={plan.popular ? 'primary' : 'outline-red'} className="w-full" aria-label={`Join ${plan.title} membership plan`}>Join Now</Button>
+                    <Button
+                      variant={plan.popular ? 'primary' : 'outline-red'}
+                      className="w-full"
+                      aria-label={`Join ${plan.title} membership plan`}
+                      onClick={() => {
+                        // In a real implementation, this would take the user to join the plan
+                        alert(`Joining ${plan.title} plan`);
+                      }}
+                    >
+                      Join Now
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -474,7 +492,7 @@ export default function Home() {
             ].map((trainer, index) => (
               <Card key={index} className="p-6 bg-core-gray-800/50 border border-core-gray-700 hover:border-core-red/50 transition-all relative overflow-hidden group">
                 <div className="w-32 h-32 rounded-full mx-auto mb-6 overflow-hidden relative z-10 border-2 border-core-gray-700 group-hover:border-core-red transition-colors">
-                  <Image src={trainer.image.src} alt={`${trainer.name} - ${trainer.specialty}`} width={128} height={128} className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                  <Image src={trainer.image} alt={`${trainer.name} - ${trainer.specialty}`} width={128} height={128} className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500" priority={false} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 25vw, 128px" />
                 </div>
                 <h3 className="text-2xl font-bold text-white relative z-10 uppercase">{trainer.name}</h3>
                 <p className="text-core-orange relative z-10 mb-4 font-medium italic">{trainer.specialty}</p>
@@ -512,11 +530,9 @@ export default function Home() {
                     onChange={setRecaptchaValue}
                     onErrored={() => {
                       setSubmitMessage({ type: 'error', text: 'reCAPTCHA error. Please refresh and try again.' });
-                      console.error('reCAPTCHA error occurred');
                     }}
                     onExpired={() => {
                       setRecaptchaValue(null);
-                      console.warn('reCAPTCHA token expired');
                     }}
                   />
                 </div>
@@ -526,6 +542,7 @@ export default function Home() {
                   type="submit"
                   className="w-full uppercase font-bold tracking-widest"
                   disabled={isSubmitting}
+                  onClick={() => {}} // onClick is handled by form submission
                 >
                   {isSubmitting ? 'Sending...' : 'Send Message'}
                 </Button>
@@ -541,9 +558,9 @@ export default function Home() {
                 <div className="relative z-10 text-white">
                   <h3 className="text-2xl font-bold mb-6 uppercase italic">Location</h3>
                   <div className="space-y-4">
-                    <p><FaMapMarkerAlt className="inline mr-2 text-core-red" /> 14th Floor, Ocean Tower, Clifton, Karachi</p>
-                    <p><FaPhone className="inline mr-2 text-core-red" /> +92 300 1234567</p>
-                    <p><FaClock className="inline mr-2 text-core-red" /> 5:00 AM - 11:00 PM</p>
+                    <p><FaMapMarkerAlt className="inline mr-2 text-core-red" aria-hidden="true" /> 14th Floor, Ocean Tower, Clifton, Karachi</p>
+                    <p><FaPhone className="inline mr-2 text-core-red" aria-hidden="true" /> +92 300 1234567</p>
+                    <p><FaClock className="inline mr-2 text-core-red" aria-hidden="true" /> 5:00 AM - 11:00 PM</p>
                   </div>
                   <div className="mt-6 h-64 rounded-lg overflow-hidden border border-core-gray-600">
                     <iframe
@@ -555,11 +572,12 @@ export default function Home() {
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
                       title="CORE Karachi Location Map"
+                      aria-label="Map showing location of CORE Karachi at Ocean Tower, Clifton, Karachi"
                     />
                   </div>
                   <div className="flex justify-center lg:justify-start space-x-6 mt-6">
-                    <a href="https://facebook.com/corekarachi" target="_blank" className="hover:text-core-red transition-colors"><FaFacebook size={24} /></a>
-                    <a href="https://instagram.com/corekarachi" target="_blank" className="hover:text-core-red transition-colors"><FaInstagram size={24} /></a>
+                    <a href="https://facebook.com/corekarachi" target="_blank" rel="noopener noreferrer" className="hover:text-core-red transition-colors" aria-label="Follow us on Facebook"><FaFacebook size={24} aria-hidden="true" /></a>
+                    <a href="https://instagram.com/corekarachi" target="_blank" rel="noopener noreferrer" className="hover:text-core-red transition-colors" aria-label="Follow us on Instagram"><FaInstagram size={24} aria-hidden="true" /></a>
                   </div>
                 </div>
               </Card>
@@ -595,12 +613,12 @@ export default function Home() {
             <div className="space-y-6">
               <h4 className="text-xl font-bold text-white uppercase tracking-wide">Follow Us</h4>
               <div className="flex space-x-7">
-                <a href="https://facebook.com/corekarachi" target="_blank" rel="noopener noreferrer" className="hover:text-core-red transition-colors duration-300 transform hover:scale-110">
-                  <FaFacebook size={32} />
+                <a href="https://facebook.com/corekarachi" target="_blank" rel="noopener noreferrer" className="hover:text-core-red transition-colors duration-300 transform hover:scale-110" aria-label="Follow us on Facebook">
+                  <FaFacebook size={32} aria-hidden="true" />
                   <span className="sr-only">Facebook</span>
                 </a>
-                <a href="https://instagram.com/corekarachi" target="_blank" rel="noopener noreferrer" className="hover:text-core-red transition-colors duration-300 transform hover:scale-110">
-                  <FaInstagram size={32} />
+                <a href="https://instagram.com/corekarachi" target="_blank" rel="noopener noreferrer" className="hover:text-core-red transition-colors duration-300 transform hover:scale-110" aria-label="Follow us on Instagram">
+                  <FaInstagram size={32} aria-hidden="true" />
                   <span className="sr-only">Instagram</span>
                 </a>
               </div>
@@ -611,11 +629,11 @@ export default function Home() {
               <h4 className="text-xl font-bold text-white uppercase tracking-wide">Connect</h4>
               <div className="space-y-5">
                 <p className="flex items-start text-base leading-relaxed">
-                  <FaPhone className="mr-4 text-core-red flex-shrink-0 mt-1" />
+                  <FaPhone className="mr-4 text-core-red flex-shrink-0 mt-1" aria-hidden="true" />
                   +92 21 35140836
                 </p>
                 <p className="flex items-start text-base leading-relaxed">
-                  <FaEnvelope className="mr-4 text-core-red flex-shrink-0 mt-1" />
+                  <FaEnvelope className="mr-4 text-core-red flex-shrink-0 mt-1" aria-hidden="true" />
                   info@corekarachi.com
                 </p>
               </div>
@@ -630,9 +648,15 @@ export default function Home() {
       </footer>
 
       {/* WhatsApp Button */}
-      <a href="https://wa.me/923001234567" className="fixed bottom-6 right-6 bg-core-green p-4 rounded-full text-white shadow-lg hover:scale-110 transition-transform z-50" aria-label="Contact us on WhatsApp">
-        <FaWhatsapp size={24} />
+      <a href="https://wa.me/923001234567" target="_blank" rel="noopener noreferrer" className="fixed bottom-6 right-6 bg-core-green p-4 rounded-full text-white shadow-lg hover:scale-110 transition-transform z-50" aria-label="Contact us on WhatsApp">
+        <FaWhatsapp size={24} aria-hidden="true" />
       </a>
+
+      {/* Lazy-loaded scripts */}
+      <Script
+        src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "your-site-key-here"}`}
+        strategy="lazyOnload"
+      />
     </div>
   );
 }

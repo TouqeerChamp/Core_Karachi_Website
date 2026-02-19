@@ -91,11 +91,11 @@ const Testimonials = () => {
                       </div>
 
                       <div className="relative">
-                        <FaQuoteLeft className="w-6 h-6 text-core-red mb-3" />
+                        <FaQuoteLeft className="w-6 h-6 text-core-red mb-3" aria-hidden="true" />
                         <p className="text-core-gray-300 text-lg italic leading-relaxed">
                           "{testimonial.content}"
                         </p>
-                        <FaQuoteRight className="w-6 h-6 text-core-red mt-3 ml-auto" />
+                        <FaQuoteRight className="w-6 h-6 text-core-red mt-3 ml-auto" aria-hidden="true" />
                       </div>
                     </div>
                   </div>
