@@ -1,26 +1,255 @@
 @import "tailwindcss";
 
 :root {
+  /* Light mode colors */
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000000;
+  --card: #f8fafc;
+  --card-foreground: #0f172a;
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+  --secondary: #e50914;
+  --secondary-foreground: #ffffff;
+  --accent: #ff6b35;
+  --accent-foreground: #ffffff;
+  --border: #e2e8f0;
+  /* Fitness-themed colors */
+  --core-red: #e50914;
+  --core-orange: #ff6b35;
+  --core-gray-900: #0f0f0f;
+  --core-gray-800: #1a1a1a;
+  --core-gray-700: #374151;
+  --core-gray-600: #4b5563;
+  --core-gray-500: #6b7280;
+  --core-gray-400: #9ca3af;
+  --core-gray-300: #d1d5db;
+  --core-gray-200: #e5e7eb;
+  --core-gray-100: #f3f4f6;
+  --core-green: #10b981;
+  --core-blue: #1877f2;
+}
+
+.dark {
+  /* Dark mode colors */
+  --background: #0f0f0f;
+  --foreground: #ffffff;
+  --card: #1a1a1a;
+  --card-foreground: #f8fafc;
+  --primary: #ffffff;
+  --primary-foreground: #000000;
+  --secondary: #e50914;
+  --secondary-foreground: #ffffff;
+  --accent: #ff6b35;
+  --accent-foreground: #ffffff;
+  --border: #333333;
+  /* Fitness-themed colors */
+  --core-red: #e50914;
+  --core-orange: #ff6b35;
+  --core-gray-900: #0f0f0f;
+  --core-gray-800: #1a1a1a;
+  --core-gray-700: #374151;
+  --core-gray-600: #4b5563;
+  --core-gray-500: #6b7280;
+  --core-gray-400: #9ca3af;
+  --core-gray-300: #d1d5db;
+  --core-gray-200: #e5e7eb;
+  --core-gray-100: #f3f4f6;
+  --core-green: #10b981;
+  --core-blue: #1877f2;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-core-red: var(--core-red);
+  --color-core-orange: var(--core-orange);
+  --color-core-gray-900: var(--core-gray-900);
+  --color-core-gray-800: var(--core-gray-800);
+  --color-core-gray-700: var(--core-gray-700);
+  --color-core-gray-600: var(--core-gray-600);
+  --color-core-gray-500: var(--core-gray-500);
+  --color-core-gray-400: var(--core-gray-400);
+  --color-core-gray-300: var(--core-gray-300);
+  --color-core-gray-200: var(--core-gray-200);
+  --color-core-gray-100: var(--core-gray-100);
+  --color-core-green: var(--core-green);
+  --color-core-blue: var(--core-blue);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-oswald);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Custom dark-themed background */
+body {
+  @apply bg-background text-foreground;
+  background: linear-gradient(135deg, #0f0f0f 0%, #000000 100%);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* Modern scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-core-gray-600 rounded-full hover:bg-core-gray-500 transition-colors duration-200;
+}
+
+::-webkit-scrollbar-corner {
+  @apply bg-transparent;
+}
+
+/* Custom scrollbar for Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #374151 #1F2937;
+}
+
+/* Heading font styling */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-oswald), system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+/* Responsive typography */
+h1 {
+  @apply text-4xl md:text-5xl lg:text-6xl font-bold;
+}
+
+h2 {
+  @apply text-3xl md:text-4xl lg:text-5xl font-bold;
+}
+
+h3 {
+  @apply text-2xl md:text-3xl lg:text-4xl font-bold;
+}
+
+/* Fitness-inspired animations */
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(229, 9, 20, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(229, 9, 20, 0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+/* Fitness-themed button hover effects */
+.btn-transform {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-transform:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Fitness-themed border styles */
+.border-red-accent {
+  border: 2px solid var(--secondary);
+}
+
+.border-orange-accent {
+  border: 2px solid var(--accent);
+}
+
+/* Utility classes for fitness theme */
+.bg-gradient-fitness {
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+}
+
+.text-gradient-fitness {
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Fitness-themed grid patterns */
+.grid-pattern {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.15) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+/* Smooth transitions for all elements */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Enable transitions only on elements that need them */
+.transition-enabled {
+  transition: all 0.3s ease;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+  h1 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h2 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl;
+  }
+}
+
+/* Focus styles for accessibility */
+.focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 2px;
+}
+
+/* Fitness-themed loader */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--secondary);
+  animation: spin 1s ease-in-out infinite;
 }

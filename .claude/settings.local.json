@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install @fontsource/inter @fontsource/oswald)",
+      "Bash(dir:*)",
+      "Bash(Get-ChildItem -Path . -Directory)",
+      "Bash(findstr:*)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(npm view:*)",
+      "Bash(npx next@latest dev:*)",
+      "Bash(npx next build:*)",
+      "Bash(npm install)",
+      "Bash(npm install --legacy-peer-deps)",
+      "Bash(del \"C:\\\\Users\\\\Touqeer\\\\Desktop\\\\Core_Karachi\\\\core-karachi\\\\next.config.ts\")",
+      "Bash(npx next dev:*)",
+      "Bash(npm run dev)",
+      "Bash(node --version:*)",
+      "Bash(npm run build)",
+      "Bash(npm install react-google-recaptcha)",
+      "Bash(npm install @types/react-google-recaptcha --save-dev)"
+    ]
+  }
+}
