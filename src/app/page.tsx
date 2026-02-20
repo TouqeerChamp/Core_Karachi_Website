@@ -335,9 +335,9 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => (
-              <Card key={index} className="text-center p-8 bg-core-gray-800/50 border-core-red/20 hover:border-core-red/40 transition-all duration-300 relative overflow-hidden group">
-                <div className="absolute inset-0 z-0">
-                  <Image src={service.image} alt={`${service.title} - ${service.description}`} width={400} height={300} className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" />
+              <Card key={index} className="text-center p-8 bg-core-gray-800/50 border-core-red/20 hover:border-core-red/40 transition-all duration-300 relative overflow-hidden group hover:scale-105 hover:shadow-2xl">
+                <div className="absolute inset-0 z-0 overflow-hidden">
+                  <Image src={service.image} alt={`${service.title} - ${service.description}`} width={400} height={300} className="object-cover w-full h-full" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" />
                   <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors z-10"></div>
                 </div>
                 <div className="relative z-10">
@@ -427,9 +427,9 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {whyChooseUs.map((item, index) => (
-              <Card key={index} className="text-center p-8 bg-core-gray-800/50 border-core-red/20 hover:border-core-red/40 transition-all duration-300 relative overflow-hidden group">
-                <div className="absolute inset-0 z-0">
-                  <Image src={item.image} alt={`${item.title} - ${item.description}`} width={400} height={300} className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw" />
+              <Card key={index} className="text-center p-8 bg-core-gray-800/50 border-core-red/20 hover:border-core-red/40 transition-all duration-300 relative overflow-hidden group hover:scale-105 hover:shadow-2xl">
+                <div className="absolute inset-0 z-0 overflow-hidden">
+                  <Image src={item.image} alt={`${item.title} - ${item.description}`} width={400} height={300} className="object-cover w-full h-full" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw" />
                   <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors z-10"></div>
                 </div>
                 <div className="relative z-10">
@@ -451,7 +451,7 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {membershipPlans.map((plan, index) => (
-              <div key={index} className={`text-center p-8 rounded-lg transition-all duration-300 relative overflow-hidden border ${plan.popular ? 'border-core-red shadow-lg shadow-core-red/20 scale-105' : 'bg-core-gray-800/50 border-core-gray-700'}`}>
+              <div key={index} className={`text-center p-8 rounded-lg transition-all duration-300 relative overflow-hidden border ${plan.popular ? 'border-core-red shadow-lg shadow-core-red/20 scale-105' : 'bg-core-gray-800/50 border-core-gray-700'} hover:scale-105 hover:border-core-red hover:shadow-2xl`}>
                 <div className="relative z-10">
                   {plan.popular && <div className="absolute -top-3 left-1/2 transform -translate-x-1/2"><span className="bg-core-red text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Most Popular</span></div>}
                   <h3 className="text-2xl font-bold text-white mb-2 uppercase">{plan.title}</h3>
@@ -490,9 +490,9 @@ export default function Home() {
               { name: 'Coach Ahmed', specialty: 'Personal Training', image: trainer3Img },
               { name: 'Coach Maria', specialty: 'Nutrition Expert', image: trainer4Img }
             ].map((trainer, index) => (
-              <Card key={index} className="p-6 bg-core-gray-800/50 border border-core-gray-700 hover:border-core-red/50 transition-all relative overflow-hidden group">
+              <Card key={index} className="p-6 bg-core-gray-800/50 border border-core-gray-700 hover:border-core-red/50 transition-all relative overflow-hidden group hover:scale-105 hover:shadow-2xl">
                 <div className="w-32 h-32 rounded-full mx-auto mb-6 overflow-hidden relative z-10 border-2 border-core-gray-700 group-hover:border-core-red transition-colors">
-                  <Image src={trainer.image} alt={`${trainer.name} - ${trainer.specialty}`} width={128} height={128} className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500" priority={false} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 25vw, 128px" />
+                  <Image src={trainer.image} alt={`${trainer.name} - ${trainer.specialty}`} width={128} height={128} className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-500" priority={false} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 25vw, 128px" />
                 </div>
                 <h3 className="text-2xl font-bold text-white relative z-10 uppercase">{trainer.name}</h3>
                 <p className="text-core-orange relative z-10 mb-4 font-medium italic">{trainer.specialty}</p>
