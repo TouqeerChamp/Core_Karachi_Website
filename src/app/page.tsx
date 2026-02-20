@@ -299,7 +299,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="relative py-28 md:py-40 overflow-hidden mt-16 h-[80vh] flex items-center">
+      <section id="home" className="relative overflow-hidden mt-16 h-screen flex items-center">
         <div className="absolute inset-0 z-0">
                   <Image
                     src={heroImg}
