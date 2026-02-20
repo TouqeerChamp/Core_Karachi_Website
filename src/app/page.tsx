@@ -361,7 +361,7 @@ export default function Home() {
 
           {/* Weekly Schedule Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
-            <div className="bg-core-gray-800/50 border border-core-gray-700 rounded-lg p-6">
+            <div className="bg-core-gray-800/50 border border-core-gray-700 rounded-lg p-6 hover:scale-105 hover:shadow-2xl hover:border-core-red transition-all duration-300">
               <h3 className="text-2xl font-bold text-white mb-4 text-center uppercase">Monday - Friday</h3>
               <div className="space-y-4">
                 <div className="flex justify-between items-center py-3 border-b border-core-gray-700">
@@ -381,7 +381,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="bg-core-gray-800/50 border border-core-gray-700 rounded-lg p-6">
+            <div className="bg-core-gray-800/50 border border-core-gray-700 rounded-lg p-6 hover:scale-105 hover:shadow-2xl hover:border-core-red transition-all duration-300">
               <h3 className="text-2xl font-bold text-white mb-4 text-center uppercase">Saturday - Sunday</h3>
               <div className="space-y-4">
                 <div className="flex justify-between items-center py-3 border-b border-core-gray-700">
