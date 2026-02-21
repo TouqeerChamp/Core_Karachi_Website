@@ -21,6 +21,14 @@ import trainer1Img from '../../public/images/trainer1.jpg';
 import trainer2Img from '../../public/images/trainer2.jpg';
 import trainer3Img from '../../public/images/trainer3.jpg';
 import trainer4Img from '../../public/images/trainer4.jpg';
+import trainer5Img from '../../public/images/trainer5.webp';
+import trainer6Img from '../../public/images/trainer6.webp';
+import trainer7Img from '../../public/images/trainer7.webp';
+import trainer8Img from '../../public/images/trainer8.webp';
+import trainer9Img from '../../public/images/trainer9.webp';
+import trainer10Img from '../../public/images/trainer10.webp';
+import trainer11Img from '../../public/images/trainer11.webp';
+import trainer12Img from '../../public/images/trainer12.webp';
 import why1 from '../../public/images/why1.jpg';
 import why2 from '../../public/images/why2.jpg';
 import why3 from '../../public/images/why3.jpg';
@@ -461,12 +469,20 @@ export default function Home() {
       <section id="trainers" className="py-20 bg-brand-bg">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-brand-dark mb-16 uppercase italic tracking-wider">Meet Our Elite Trainers</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {[
               { name: 'Coach Zaid', specialty: 'Strength Specialist', image: trainer1Img },
               { name: 'Coach Sarah', specialty: 'Athletic Conditioning', image: trainer2Img },
               { name: 'Coach Ahmed', specialty: 'Personal Training', image: trainer3Img },
-              { name: 'Coach Maria', specialty: 'Nutrition Expert', image: trainer4Img }
+              { name: 'Coach Maria', specialty: 'Nutrition Expert', image: trainer4Img },
+              { name: 'ADIBA KHAN', specialty: 'Strength & Conditioning', image: trainer5Img },
+              { name: 'ARBAB AHMAD', specialty: 'Functional Training', image: trainer6Img },
+              { name: 'FAHAD MIR', specialty: 'Powerlifting Coach', image: trainer7Img },
+              { name: 'FARHAN WARSI', specialty: 'Bodybuilding Specialist', image: trainer8Img },
+              { name: 'HUMAYUN KHAN', specialty: 'CrossFit Level 1', image: trainer9Img },
+              { name: 'INAYAT HUSSAIN', specialty: 'Cardio & Endurance', image: trainer10Img },
+              { name: 'KASHIF REHMAN', specialty: 'Flexibility & Mobility', image: trainer11Img },
+              { name: 'ZAHID ZAMAN', specialty: 'Senior Fitness Consultant', image: trainer12Img }
             ].map((trainer, index) => (
               <Card key={index} className="p-6 bg-brand-bg border border-brand-dark/20 hover:border-2 hover:border-brand-primary hover:shadow-[0_0_25px_rgba(255,102,0,0.6)] hover:bg-brand-primary/10 transition-all duration-500 relative overflow-hidden group hover:scale-105">
                 <div className="w-32 h-32 rounded-full mx-auto mb-6 overflow-hidden relative z-10 border-2 border-brand-dark/20 group-hover:border-brand-primary transition-colors">
