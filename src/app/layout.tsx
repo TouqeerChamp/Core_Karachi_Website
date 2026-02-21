@@ -21,9 +21,7 @@ export const metadata: Metadata = {
   description: "Elevate your performance 14 stories above the city. CORE Karachi offers elite strength training, athletic conditioning, and personal coaching in Clifton, Karachi.",
   keywords: "Gym in Clifton, CORE Karachi, Fitness Karachi, Ocean Tower Gym, Personal Training Karachi, Strength and Conditioning",
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    icon: "/icon.webp",
   },
   openGraph: {
     title: "CORE Karachi | High-Performance Gym & Conditioning at Ocean Tower",

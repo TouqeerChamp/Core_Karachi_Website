@@ -6,12 +6,13 @@ import Script from 'next/script';
 import Button from "@/components/Button";
 import Card from "@/components/Card";
 import Testimonials from "@/components/Testimonials";
+import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
 import ReCAPTCHA from "react-google-recaptcha";
 import { FaWhatsapp, FaMapMarkerAlt, FaClock, FaUser, FaEnvelope, FaPhone, FaBars, FaTimes, FaFacebook, FaInstagram, FaFacebookMessenger, FaMap } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
 
 // Static imports for images
-import heroImg from '../../public/images/hero.jpg';
 import service1Img from '../../public/images/service1.jpg';
 import service2Img from '../../public/images/service2.jpg';
 import service3Img from '../../public/images/service3.jpg';
@@ -306,33 +307,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="relative overflow-hidden mt-16 h-screen flex items-center">
-        <div className="absolute inset-0 z-0">
-                  <Image
-                    src={heroImg}
-                    alt="CORE Karachi - Elite Fitness Performance Center"
-                    fill
-                    priority={true}
-                    sizes="100vw"
-                    className="object-cover"
-                  />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-black/40"></div>
-        </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight uppercase italic">
-              <span className="text-brand-primary">ELITE PERFORMANCE.</span> <br/> <span className="text-brand-primary">ELEVATED.</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-white mb-10 max-w-3xl mx-auto">
-              CORE Karachi is more than a gym &mdash; it&apos;s a sanctuary for those who demand more from themselves. Experience world-class conditioning 14 stories above the city at Ocean Tower.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="primary" size="lg" onClick={() => scrollToSection('contact')} aria-label="Book a tour">Book a Tour</Button>
-              <Button variant="outline-orange" size="lg" onClick={() => scrollToSection('membership')} aria-label="View membership plans">View Plans</Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero scrollToSection={scrollToSection} />
 
       {/* Services Section */}
       <section id="services" className="py-20">
@@ -590,65 +565,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-brand-bg pt-20 pb-16 border-t border-gray-200 text-gray-700">
-        <div className="container mx-auto px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-10 mb-12">
-            {/* Brand Column */}
-            <div className="space-y-6">
-              <h3 className="text-3xl font-bold text-brand-dark uppercase tracking-wide">CORE <span className="text-brand-primary">KARACHI</span></h3>
-              <p className="text-base italic text-brand-dark">Elite Performance Sanctuary</p>
-              <p className="text-base text-brand-dark leading-relaxed">14th Floor, Ocean Tower, Clifton, Karachi</p>
-            </div>
-
-            {/* Explore Column */}
-            <div className="space-y-6">
-              <h4 className="text-xl font-bold text-brand-dark uppercase tracking-wide">Explore</h4>
-              <ul className="space-y-4">
-                <li><a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection('home'); }} className="block hover:text-brand-primary transition-colors duration-300 text-base leading-relaxed uppercase font-medium" aria-label="Go to home section">Home</a></li>
-                <li><a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection('about'); }} className="block hover:text-brand-primary transition-colors duration-300 text-base leading-relaxed uppercase font-medium" aria-label="Go to about section">About</a></li>
-                <li><a href="#services" onClick={(e) => { e.preventDefault(); scrollToSection('services'); }} className="block hover:text-brand-primary transition-colors duration-300 text-base leading-relaxed uppercase font-medium" aria-label="Go to services section">Services</a></li>
-                <li><a href="#trainers" onClick={(e) => { e.preventDefault(); scrollToSection('trainers'); }} className="block hover:text-brand-primary transition-colors duration-300 text-base leading-relaxed uppercase font-medium" aria-label="Go to trainers section">Trainers</a></li>
-                <li><a href="#membership" onClick={(e) => { e.preventDefault(); scrollToSection('membership'); }} className="block hover:text-brand-primary transition-colors duration-300 text-base leading-relaxed uppercase font-medium" aria-label="Go to membership section">Membership</a></li>
-              </ul>
-            </div>
-
-            {/* Social Column */}
-            <div className="space-y-6">
-              <h4 className="text-xl font-bold text-brand-dark uppercase tracking-wide">Follow Us</h4>
-              <div className="flex space-x-7">
-                <a href="https://facebook.com/corekarachi" target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors duration-300 transform hover:scale-110" aria-label="Follow us on Facebook">
-                  <FaFacebook size={32} aria-hidden="true" />
-                  <span className="sr-only">Facebook</span>
-                </a>
-                <a href="https://instagram.com/corekarachi" target="_blank" rel="noopener noreferrer" className="hover:text-brand-primary transition-colors duration-300 transform hover:scale-110" aria-label="Follow us on Instagram">
-                  <FaInstagram size={32} aria-hidden="true" />
-                  <span className="sr-only">Instagram</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Connect Column */}
-            <div className="space-y-6">
-              <h4 className="text-xl font-bold text-brand-dark uppercase tracking-wide">Connect</h4>
-              <div className="space-y-5">
-                <p className="flex items-start text-base leading-relaxed">
-                  <FaPhone className="mr-4 text-brand-primary flex-shrink-0 mt-1" aria-hidden="true" />
-                  +92 21 35140836
-                </p>
-                <p className="flex items-start text-base leading-relaxed">
-                  <FaEnvelope className="mr-4 text-brand-primary flex-shrink-0 mt-1" aria-hidden="true" />
-                  info@corekarachi.com
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Bar */}
-          <div className="border-t border-brand-dark/20 pt-10 mt-8 text-center">
-            <p className="text-sm uppercase tracking-widest text-brand-dark/60">© 2026 CORE KARACHI. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       {/* WhatsApp Button */}
       <a href="https://wa.me/923001234567" target="_blank" rel="noopener noreferrer" className="fixed bottom-6 right-6 bg-brand-primary p-4 rounded-full text-white shadow-lg hover:scale-110 transition-transform z-50" aria-label="Contact us on WhatsApp">

@@ -62,6 +62,15 @@ export default {
         '3xl': '1.5rem',
         'full': '9999px', // Rounded-full for circular buttons
       },
+      animation: {
+        'fade-in-up': 'fadeInUp 0.5s ease-out',
+      },
+      keyframes: {
+        fadeInUp: {
+          '0%': { opacity: 0, transform: 'translateY(20px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        }
+      }
     },
   },
 }
