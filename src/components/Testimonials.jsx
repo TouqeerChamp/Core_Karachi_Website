@@ -62,7 +62,7 @@ const Testimonials = () => {
             >
               {testimonials.map((testimonial, index) => (
                 <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
-                  <div className="bg-core-gray-800/50 border border-core-gray-700 rounded-lg p-8 relative overflow-hidden group">
+                  <div className="bg-core-gray-800/50 border border-core-gray-700 rounded-lg p-8 relative overflow-hidden group hover:border-2 hover:border-brand-primary hover:shadow-[0_0_25px_rgba(255,102,0,0.6)] hover:bg-brand-primary/10 transition-all duration-500">
                     {/* Decorative quote */}
                     <div className="absolute top-4 right-6 opacity-10">
                       <FaQuoteLeft className="w-16 h-16 text-core-red" />

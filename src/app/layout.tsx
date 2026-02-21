@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Oswald } from "next/font/google";
+import { Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
   display: "swap",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
-const oswald = Oswald({
-  variable: "--font-oswald",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
   display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -21,7 +21,9 @@ export const metadata: Metadata = {
   description: "Elevate your performance 14 stories above the city. CORE Karachi offers elite strength training, athletic conditioning, and personal coaching in Clifton, Karachi.",
   keywords: "Gym in Clifton, CORE Karachi, Fitness Karachi, Ocean Tower Gym, Personal Training Karachi, Strength and Conditioning",
   icons: {
-    icon: "/images/logo.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
   },
   openGraph: {
     title: "CORE Karachi | High-Performance Gym & Conditioning at Ocean Tower",
@@ -55,7 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body
-        className={`${inter.variable} ${oswald.variable} antialiased bg-background text-foreground`}
+        className={`${montserrat.variable} ${poppins.variable} antialiased bg-background text-foreground`}
       >
         {children}
       </body>

@@ -10,14 +10,14 @@ const Button = ({
   type = 'button',
   ...props
 }) => {
-  const baseClasses = 'inline-flex items-center justify-center font-bold rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-core-red disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseClasses = 'inline-flex items-center justify-center font-bold rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary disabled:opacity-50 disabled:cursor-not-allowed';
 
   const variants = {
-    primary: 'bg-core-red text-white border border-core-red hover:bg-white hover:text-core-red hover:border-core-red',
-    secondary: 'bg-core-orange text-white border border-core-orange hover:bg-white hover:text-core-orange hover:border-core-orange',
-    outline: 'bg-transparent text-white border-2 border-white hover:bg-white hover:text-black',
-    'outline-red': 'bg-transparent text-core-red border-2 border-core-red hover:bg-core-red hover:text-white',
-    dark: 'bg-black text-white border border-core-red hover:bg-core-red hover:text-black',
+    primary: 'bg-brand-primary text-white border border-brand-primary hover:bg-brand-primary/90 hover:text-white hover:border-brand-primary',
+    secondary: 'bg-brand-dark text-white border border-brand-dark hover:bg-brand-primary hover:text-white hover:border-brand-primary',
+    outline: 'bg-transparent text-brand-dark border-2 border-brand-dark hover:bg-brand-dark hover:text-white',
+    'outline-orange': 'bg-transparent text-brand-primary border-2 border-brand-primary hover:bg-brand-primary hover:text-white',
+    'outline-dark': 'bg-transparent text-brand-dark border-2 border-brand-dark hover:bg-brand-dark hover:text-white',
   };
 
   const sizes = {

@@ -6,7 +6,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        // CORE Karachi Brand Colors
+        // Core Karachi Brand Colors
+        'brand-primary': '#FF6600', // Core Orange
+        'brand-bg': '#FFFFFF',      // Clean White
+        'brand-dark': '#1A1A1A',    // Professional Charcoal
         'core-black': '#000000',
         'core-red': '#E50914', // Netflix-inspired red, similar to their branding
         'core-orange': '#FF6B35', // A bold orange-red
@@ -25,8 +28,8 @@ export default {
         },
       },
       fontFamily: {
-        'sans': ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
-        'heading': ['var(--font-oswald)', 'Oswald', 'system-ui', 'sans-serif'],
+        'sans': ['Montserrat', 'Poppins', 'system-ui', 'sans-serif'],
+        'heading': ['Montserrat', 'Poppins', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         'xxs': ['0.625rem', { lineHeight: '0.75rem' }],
@@ -57,7 +60,7 @@ export default {
         'xl': '0.75rem',
         '2xl': '1rem',
         '3xl': '1.5rem',
-        'full': '9999px',
+        'full': '9999px', // Rounded-full for circular buttons
       },
     },
   },

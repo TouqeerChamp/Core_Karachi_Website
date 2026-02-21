@@ -3,12 +3,12 @@
 :root {
   /* Light mode colors */
   --background: #ffffff;
-  --foreground: #000000;
+  --foreground: #1a1a1a; /* Changed to professional charcoal */
   --card: #f8fafc;
   --card-foreground: #0f172a;
-  --primary: #000000;
+  --primary: #FF6600; /* Core Karachi Orange */
   --primary-foreground: #ffffff;
-  --secondary: #e50914;
+  --secondary: #1a1a1a; /* Professional Charcoal */
   --secondary-foreground: #ffffff;
   --accent: #ff6b35;
   --accent-foreground: #ffffff;
@@ -27,6 +27,10 @@
   --core-gray-100: #f3f4f6;
   --core-green: #10b981;
   --core-blue: #1877f2;
+  /* New Core Karachi brand colors */
+  --brand-primary: #FF6600;
+  --brand-bg: #FFFFFF;
+  --brand-dark: #1A1A1A;
 }
 
 .dark {
@@ -35,8 +39,8 @@
   --foreground: #ffffff;
   --card: #1a1a1a;
   --card-foreground: #f8fafc;
-  --primary: #ffffff;
-  --primary-foreground: #000000;
+  --primary: #FF6600; /* Core Karachi Orange */
+  --primary-foreground: #ffffff;
   --secondary: #e50914;
   --secondary-foreground: #ffffff;
   --accent: #ff6b35;
@@ -56,6 +60,10 @@
   --core-gray-100: #f3f4f6;
   --core-green: #10b981;
   --core-blue: #1877f2;
+  /* New Core Karachi brand colors */
+  --brand-primary: #FF6600;
+  --brand-bg: #FFFFFF;
+  --brand-dark: #1A1A1A;
 }
 
 @theme inline {
@@ -83,8 +91,11 @@
   --color-core-gray-100: var(--core-gray-100);
   --color-core-green: var(--core-green);
   --color-core-blue: var(--core-blue);
-  --font-sans: var(--font-inter);
-  --font-heading: var(--font-oswald);
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-dark: var(--brand-dark);
+  --font-sans: 'Montserrat', 'Poppins', system-ui, sans-serif;
+  --font-heading: 'Montserrat', 'Poppins', system-ui, sans-serif;
 }
 
 /* Custom dark-themed background */

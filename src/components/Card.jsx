@@ -7,7 +7,7 @@ const Card = ({
   hoverEffect = true,
   ...props
 }) => {
-  const baseClasses = 'card rounded-lg transition-all duration-300 border border-core-gray-700 bg-core-gray-800/50 backdrop-blur-sm';
+  const baseClasses = 'card rounded-lg transition-all duration-300 border border-brand-dark/20 bg-brand-bg/50 backdrop-blur-sm';
 
   const variants = {
     default: '',
@@ -18,7 +18,7 @@ const Card = ({
   };
 
   const hoverClass = hoverEffect
-    ? 'card-hover hover:border-core-red/50 hover:shadow-core-red/20'
+    ? 'card-hover hover:border-2 hover:border-brand-primary hover:shadow-[0_0_25px_rgba(255,102,0,0.6)] hover:bg-brand-primary/10 transition-all duration-500'
     : 'hover:border-core-gray-600';
 
   const classes = [
